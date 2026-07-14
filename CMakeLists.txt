@@ -25,6 +25,13 @@ add_executable(RestartTool
     ${GLAD_DIR}/src/glad.c
  "src/interface.cpp" "include/interface.h" "include/restartHandler.h" "src/restartHandler.cpp")
 
+if(WIN32)
+    set_target_properties(RestartTool PROPERTIES
+        WIN32_EXECUTABLE TRUE
+        LINK_FLAGS "/ENTRY:mainCRTStartup"
+    )
+endif()
+
 target_include_directories(RestartTool PRIVATE
     ${IMGUI_DIR}
     ${IMGUI_DIR}/backends
