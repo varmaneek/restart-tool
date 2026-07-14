@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(MyProject)
+project(RestartTool)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,13 +19,13 @@ set(IMGUI_SOURCES
 
 set(GLAD_DIR external/glad)
 
-add_executable(MyProject
+add_executable(RestartTool
     src/main.cpp
     ${IMGUI_SOURCES}
     ${GLAD_DIR}/src/glad.c
- "src/interface.cpp" "include/interface.h")
+ "src/interface.cpp" "include/interface.h" "include/restartHandler.h" "src/restartHandler.cpp")
 
-target_include_directories(MyProject PRIVATE
+target_include_directories(RestartTool PRIVATE
     ${IMGUI_DIR}
     ${IMGUI_DIR}/backends
     external/glfw/include
@@ -33,7 +33,7 @@ target_include_directories(MyProject PRIVATE
     include
 )
 
-target_link_libraries(MyProject PRIVATE
+target_link_libraries(RestartTool PRIVATE
     glfw
     opengl32
 )

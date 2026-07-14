@@ -6,6 +6,7 @@
 #include <backends/imgui_impl_opengl3.h>
 
 #include "interface.h"
+#include "restartHandler.h"
 
 const char* WINDOW_TITLE = "restart tool";
 
@@ -38,7 +39,7 @@ int main() {
 		return -1;
 	}
 
-	uirenderer ui;
+	uiRenderer ui;
 
 	IMGUI_CHECKVERSION();
 
@@ -52,14 +53,21 @@ int main() {
 
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+	restartHandler rh;
+
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
+
+		if (!io.WantCaptureKeyboard)
+		{
+			rh.update();
+		}
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		ui.renderUI();
+		ui.renderUI(rh);
 
 		ImGui::Render();
 

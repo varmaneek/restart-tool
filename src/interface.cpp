@@ -1,16 +1,36 @@
+#include "restartHandler.h"
 #include "interface.h"
 #include "imgui.h"
 
-void uirenderer::renderUI() {
+
+void uiRenderer::renderUI(restartHandler& restartHandler) {
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
 	ImGui::SetNextWindowSize(ImVec2(500, 250));
 
-	ImGui::Begin("Restart Tool", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
-	ImGui::Text("test");
+	ImGui::Begin("rt", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
+	ImGui::Text("Restart Hotkey: %s", restartHandler.getHotkeyName().c_str());
+    ImGui::SameLine();
+    
+    if (restartHandler.isListeningForHotkey()) {
+        ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f), "Press Any Key...");
+    }
+    else {
+        if (ImGui::Button("rebind")) {
+            restartHandler.beginRebind();
+        }
+    }
+
+    ImGui::InputText("Process Name", restartHandler.processNameBuffer, IM_ARRAYSIZE(restartHandler.processNameBuffer));
+
+    ImGui::Separator();
+
+    ImGui::Checkbox("Send Key After Restart", &restartHandler.sendKeyAfterRestart);
+    ImGui::InputInt("Key Code To Send", &restartHandler.keyCodeToSend);
+
 	ImGui::End();
 }
 
-void uirenderer::applyStyle() {
+void uiRenderer::applyStyle() {
     ImGui::StyleColorsDark();
 
     ImGuiStyle& style = ImGui::GetStyle();
@@ -35,7 +55,7 @@ void uirenderer::applyStyle() {
     style.Colors[ImGuiCol_SliderGrab] = accentColor;
     style.Colors[ImGuiCol_SliderGrabActive] = accentHover;
     style.Colors[ImGuiCol_Border] = ImVec4(0.25f, 0.25f, 0.28f, 0.50f);
-
+    
     style.WindowRounding = 6.0f;
     style.FrameRounding = 4.0f;
     style.GrabRounding = 4.0f;

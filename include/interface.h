@@ -1,7 +1,9 @@
 #pragma once
 
-class uirenderer {
+class restartHandler;
+
+class uiRenderer {
 public:
-	void renderUI();
+	void renderUI(restartHandler& restartHandler);
 	void applyStyle();
 };
