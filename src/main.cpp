@@ -45,6 +45,7 @@ int main() {
 
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
+	io.IniFilename = nullptr;
 
 	ui.applyStyle();
 
