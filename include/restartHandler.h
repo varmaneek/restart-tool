@@ -14,7 +14,7 @@ public:
 public:
     char processNameBuffer[256] = "exampletask.exe";
     bool sendKeyAfterRestart = false;
-    int  keyCodeToSend = 179;
+    int  keyCodeToSend = 0;
 
 
 private:
