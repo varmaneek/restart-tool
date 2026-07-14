@@ -23,13 +23,14 @@ add_executable(MyProject
     src/main.cpp
     ${IMGUI_SOURCES}
     ${GLAD_DIR}/src/glad.c
-)
+ "src/interface.cpp" "include/interface.h")
 
 target_include_directories(MyProject PRIVATE
     ${IMGUI_DIR}
     ${IMGUI_DIR}/backends
     external/glfw/include
     ${GLAD_DIR}/include
+    include
 )
 
 target_link_libraries(MyProject PRIVATE
