@@ -34,9 +34,18 @@ void restartHandler::update() {
             lastPollTime = std::chrono::steady_clock::now();
 
             if (isProcessRunning(pendingProcessName)) {
-                sendKeyPress(keyCodeToSend);
                 waitingForReappear = false;
+                additionalDelayBool = true;
+                additionalDelayStart = std::chrono::steady_clock::now();
             }
+        }
+    }
+
+    if (additionalDelayBool) {
+        double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - additionalDelayStart).count();
+        if (additionalDelay < elapsed) {
+            sendKeyPress(keyCodeToSend);
+            additionalDelayBool = false;
         }
     }
 }

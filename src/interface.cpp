@@ -15,7 +15,7 @@ void uiRenderer::renderUI(restartHandler& restartHandler) {
         ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f), "Press Any Key...");
     }
     else {
-        if (ImGui::Button("rebind")) {
+        if (ImGui::Button("Rebind")) {
             restartHandler.beginRebind();
         }
     }
@@ -26,6 +26,7 @@ void uiRenderer::renderUI(restartHandler& restartHandler) {
 
     ImGui::Checkbox("Send Key After Restart", &restartHandler.sendKeyAfterRestart);
     ImGui::InputInt("Key Code To Send", &restartHandler.keyCodeToSend);
+    ImGui::InputDouble("Additional Delay", &restartHandler.additionalDelay);
 
 	ImGui::End();
 }

@@ -15,6 +15,7 @@ public:
     char processNameBuffer[256] = "exampletask.exe";
     bool sendKeyAfterRestart = false;
     int  keyCodeToSend = 0;
+    double additionalDelay = 0;
 
 
 private:
@@ -31,4 +32,8 @@ private:
     bool waitingForReappear = false;
     std::string pendingProcessName;
     std::chrono::steady_clock::time_point lastPollTime;
+
+    bool additionalDelayBool = false;
+    std::chrono::steady_clock::time_point additionalDelayStart;
+    std::chrono::steady_clock::time_point sinceAdditionalDelay;
 };
